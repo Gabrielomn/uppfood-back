@@ -21,6 +21,5 @@ exports.getByCategory = async(category) =>{
 }
 
 exports.getByQuery = async(query) => {
-    //todo
-    return ;
+    return Food.find({title : { $regex : query }});
 }

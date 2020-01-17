@@ -3,7 +3,12 @@ const repository = require('./food.repository')
 const bodyParser = require('body-parser')
 
 exports.getAll = async(req, res) =>{
-    let foods = await repository.getAll()
+    let foods
+    if(!req.query.substring){
+        foods = await repository.getAll()
+    }else{
+        foods = await repository.getByQuery(req.query.substring)
+    }
     res.status(200).send(foods)
 }
 
