@@ -1,5 +1,5 @@
 const Food = require('../../db/models/food')
-
+const convertToTitleCase = require('../../utils/titleCase.script.js').convertToTitleCase
 exports.create = async(body) => {
     const food = await new Food(body).save().catch((err)=>{
         console.log(err)
@@ -21,5 +21,6 @@ exports.getByCategory = async(category) =>{
 }
 
 exports.getByQuery = async(query) => {
+    query = convertToTitleCase(query)
     return Food.find({title : { $regex : query }});
 }
