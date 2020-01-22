@@ -1,0 +1,134 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Uppfood-API",
+        "description": "A description of Uppfood's current services",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "server":[
+        {
+            "url":"localhost:3000",
+            "description":"local"
+        },
+        {
+            "url":"https://upplify-test-back.herokuapp.com/",
+            "description":"development"
+        }
+    ],
+    "host":"localhost:8080",
+    "basepath":"",
+    "tags":[
+        {
+            "name":"Food",
+            "description":"api for cuisines in the system"
+        }
+    ],
+    "schemes":[
+        "http"
+    ],
+    "consumes":[
+        "application/json"
+    ],
+    "produces":[
+        "application/json"
+    ],
+    "paths":{
+        "/Food":{
+            "parameters": [
+                {
+                    "name": "substring",
+                    "in": "query",
+                    "required": false,
+                    "description": "Get all foods that match such substring",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Food"
+                ],
+                "summary": "Get foods from system, when no substring is used it returns every food on system.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        },
+        "/food/{category}": {
+            "parameters": [
+                {
+                    "name": "category",
+                    "in": "path",
+                    "required": true,
+                    "description": "Get all foods within given category",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Food"
+                ],
+                "summary": "Get cuisines with given category",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "category",
+                        "required": true,
+                        "description": "Cuisines with given category",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "definitions": {
+        "Food": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "cuisine": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            }
+        },"id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },"category": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+} 
