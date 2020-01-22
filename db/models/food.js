@@ -17,6 +17,10 @@ const FoodSchema = mongo.Schema({
     cuisine:{
         type:String,
         required:true
+    },
+    imageLink:{
+        type:String,
+        required:true
     }
 })
 
