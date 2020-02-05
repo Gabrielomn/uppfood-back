@@ -24,3 +24,8 @@ exports.getByQuery = async(query) => {
     query = convertToTitleCase(query)
     return Food.find({title : { $regex : query }});
 }
+
+exports.update = async(title, body) => {
+    let food = await Food.findOneAndUpdate({title: title}, body)
+    return food
+}

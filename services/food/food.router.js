@@ -5,5 +5,6 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.get('/', service.getAll)
 router.get('/:cuisine', service.getByCategory)
-
+router.post('/', service.create)
+router.put(':title', service.update)
 module.exports = router
